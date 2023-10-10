@@ -12,7 +12,7 @@ except:
 
 def change_comand(comand):
 	print(comand)
-    app.comand_text = comand
+    #app.comand_text = comand
 
 def browser():
 	'''Открывает браузер заданнный по уполчанию в системе с url указанным здесь'''
@@ -58,7 +58,7 @@ def offBot():
 
 def lampon():
 	print("lampon")
-	app.change_comand("/on1")
+	#app.change_comand("/on1")
 	#app.comand_text = "/on1"
 
 

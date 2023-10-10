@@ -179,15 +179,15 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-	if (len(config.TRUSTED_LIST)>0) and not (message.from_id  in config.TRUSTED_LIST):
+    if (len(config.TRUSTED_LIST)>0) and not (message.from_id  in config.TRUSTED_LIST):
         return
     await message.reply("Привет!\nЯ умный бот - персональный ассистент!\nМеня зовут Кеша.\nЯ могу много чего.\nОтправь мне любое сообщение, а я тебе обязательно отвечу.")
 
 @dp.message_handler(commands=['help'])
 async def send_welcome(message: types.Message):
-    if (len(config.TRUSTED_LIST)>0) and not (message.from_id  in config.TRUSTED_LIST):
-        return
-	await message.reply("Подсказка")
+	if (len(config.TRUSTED_LIST)>0) and not (message.from_id  in config.TRUSTED_LIST):
+		return
+	await message.reply("Для выполнения мной предопределенных команд обратитесь ко мне по имени")
 
 
 #@dp.message_handler(commands=['settings'])

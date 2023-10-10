@@ -42,12 +42,10 @@ def recognize(data):
     Анализ распознанной речи
     '''
     #Пропускаем все, если длина расспознанного текста меньше 7 символов
-    print(data)
     if len(data) < 7:
         return result
     #если нет фразы обращения к ассистенту, то отправляем запрос альпаке
     lowdata = remove_punctuation(data.lower())
-    print(lowdata)
     trg = words.TRIGGERS.intersection(lowdata.split())
     if not trg:
         return evaluate (data)

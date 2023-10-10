@@ -88,12 +88,13 @@ def recognize(data):
 
     #получение имени функции из ответа из data_set
     func_name = answer.split()[0]
+    #запуск функции из skills
+    exec(func_name + '()')
 
     #возврат ответа из модели data_set
     return(answer.replace(func_name, ''))
 
-    #запуск функции из skills
-    exec('commands.' + func_name + '()')
+
     
 
 

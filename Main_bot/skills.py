@@ -50,18 +50,26 @@ def offBot():
 	sys.exit()
 
 
-def passive():
-	'''Функция заглушка при простом диалоге с ботом'''
-	pass
 
-def sw1on():
-	pass
 
-def sw1off():
-	pass
+def lampon():
+	#print("lampon")
+	app.change_comand("/on1")
+
+
+
+def swoff():
+	app.comand_text = "/off1"
+
 
 def sw2on():
-	pass
+	app.comand_text = '/on2'
+
 
 def sw2off():
+	app.comand_text = '/off2'
+
+
+def passive():
+	'''Функция заглушка при простом диалоге с ботом'''
 	pass

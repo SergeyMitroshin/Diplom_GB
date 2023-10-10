@@ -26,13 +26,17 @@ from skills import *
 from alpaca_d import alpaca_init, evaluate
 from aiogram import Bot, Dispatcher, executor, types
 
-comand_text = ''
+comand_text = "text"
 
 #def recognize(data, vectorizer, clf):
 
 
-async def send_message(channel_id: int, text: str):
-    await bot.send_message(channel_id, text)
+#async def send_message(channel_id: int, text: str):
+   # await bot.send_message(channel_id, text)
+def change_comand(comand):
+    comand_text = comand
+
+
 
 def remove_punctuation(text):
     # Создаем строку со всеми знаками пунктуации
@@ -46,8 +50,8 @@ def remove_punctuation(text):
 def recognize(data):
     result = "мне нечего на это ответить"
     
-    #Анализ распознанной речи
-    #send_message(-4059882872, data)
+    #Анализ сообщения
+
     #Пропускаем все, если длина расспознанного текста меньше 7 символов
     if len(data) < 7:
         return result
@@ -129,6 +133,7 @@ async def send_welcome(message: types.Message):
 @dp.message_handler()
 async def echo(message: types.Message):
    await message.answer(recognize(message.text))
+   mess = comand_text
    if len(comand_text)>0:
       await bot.send_message(CHAT_ID, comand_text)
 

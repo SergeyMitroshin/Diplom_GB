@@ -13,6 +13,9 @@ pip install requests
 Для получения справки, спроси у него 'Что ты умеешь Кеша?' или 'справка Кеша'
 
 '''
+MAIN_TOKEN = '5800510923:AAGGIu2AuPktr_F6RmeJvwR-pbO-m5Q8D6o'
+CHAT_ID = -4059882872
+
 
 
 from sklearn.feature_extraction.text import CountVectorizer     #pip install scikit-learn
@@ -23,9 +26,13 @@ from skills import *
 from alpaca_d import alpaca_init, evaluate
 from aiogram import Bot, Dispatcher, executor, types
 
-MAIN_TOKEN = '5800510923:AAGGIu2AuPktr_F6RmeJvwR-pbO-m5Q8D6o'
+comand_text = ''
 
 #def recognize(data, vectorizer, clf):
+
+
+async def send_message(channel_id: int, text: str):
+    await bot.send_message(channel_id, text)
 
 def remove_punctuation(text):
     # Создаем строку со всеми знаками пунктуации
@@ -38,9 +45,9 @@ def remove_punctuation(text):
 
 def recognize(data):
     result = "мне нечего на это ответить"
-    '''
-    Анализ распознанной речи
-    '''
+    
+    #Анализ распознанной речи
+    #send_message(-4059882872, data)
     #Пропускаем все, если длина расспознанного текста меньше 7 символов
     if len(data) < 7:
         return result
@@ -114,6 +121,7 @@ async def send_welcome(message: types.Message):
 async def send_welcome(message: types.Message):
    await message.reply("Подсказка")
 
+
 #@dp.message_handler(commands=['settings'])
 #async def send_welcome(message: types.Message):
 #   await message.reply("Настройки")
@@ -121,6 +129,8 @@ async def send_welcome(message: types.Message):
 @dp.message_handler()
 async def echo(message: types.Message):
    await message.answer(recognize(message.text))
+   if len(comand_text)>0:
+      await bot.send_message(CHAT_ID, comand_text)
 
 
 

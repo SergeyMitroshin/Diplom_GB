@@ -194,7 +194,9 @@ async def send_welcome(message: types.Message):
 async def echo(message: types.Message):
    global comand_text
    if len(config.TRUSTED_LIST)>0:
-	   exit
+	   if message.from_id not in config.TRUSTED_LIST:
+		   await message.answer ("Получите права пользования ботом и тогда пишите")
+	       return
    await message.answer(recognize(message.text))
    mess = comand_text
    if len(comand_text)>0:

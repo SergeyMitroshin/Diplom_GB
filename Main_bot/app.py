@@ -13,8 +13,8 @@ pip install requests
 Для получения справки, спроси у него 'Что ты умеешь Кеша?' или 'справка Кеша'
 
 '''
-MAIN_TOKEN = '5800510923:AAGGIu2AuPktr_F6RmeJvwR-pbO-m5Q8D6o'
-CHAT_ID = -4059882872
+
+
 
 
 
@@ -22,20 +22,90 @@ from sklearn.feature_extraction.text import CountVectorizer     #pip install sci
 from sklearn.linear_model import LogisticRegression
 import words
 import string
-from skills import *
+#from skills import *
 from alpaca_d import alpaca_init, evaluate
 from aiogram import Bot, Dispatcher, executor, types
+import os
+import webbrowser
+import sys
+import subprocess
+import config
 
-comand_text = "text"
 
-#def recognize(data, vectorizer, clf):
+try:
+	import requests		#pip install requests
+except:
+	pass
 
+comand_text = ""
 
-#async def send_message(channel_id: int, text: str):
-   # await bot.send_message(channel_id, text)
 def change_comand(comand):
     comand_text = comand
 
+
+def browser():
+	'''Открывает браузер заданнный по уполчанию в системе с url указанным здесь'''
+
+	webbrowser.open('https://www.youtube.com', new=2)
+
+
+def game():
+	'''Нужно разместить путь к exe файлу любого вашего приложения'''
+	try:
+		subprocess.Popen('C:/Program Files/paint.net/PaintDotNet.exe')
+	except:
+		print('Путь к файлу не найден, проверьте, правильный ли он')
+
+
+def offpc():
+	#Эта команда отключает ПК под управлением Windows
+	os.system('shutdown \s')
+	print('пк был бы выключен, но команде # в коде мешает;)))')
+
+
+def weather():
+	'''Для работы этого кода нужно зарегистрироваться на сайте
+	https://openweathermap.org или переделать на ваше усмотрение под что-то другое'''
+	try:
+		print ("погода")
+		params = {'q': 'Tula', 'units': 'metric', 'lang': 'ru', 'appid': 'ключ к API'}
+		response = requests.get(f'https://api.openweathermap.org/data/2.5/weather', params=params)
+		if not response:
+			raise
+		w = response.json()
+		
+	except:
+		print('Произошла ошибка при попытке запроса к ресурсу API')
+
+
+def offBot():
+	#Отключает бота
+	sys.exit()
+
+def sw1on():
+	global comand_text
+	comand_text = "/on1"
+
+
+
+def sw1off():
+	global comand_text
+	comand_text = "/off1"
+
+
+def sw2on():
+	global comand_text
+	comand_text = '/on2'
+
+
+def sw2off():
+	global comand_text
+	comand_text = '/off2'
+
+
+def passive():
+	'''Функция заглушка при простом диалоге с ботом'''
+	pass
 
 
 def remove_punctuation(text):
@@ -70,13 +140,10 @@ def recognize(data):
     #сравниваем с вариантами, получая наиболее подходящий ответ
     # Преобразование команды пользователя в числовой вектор
     user_command_vector = vectorizer.transform([lowdata])
-
     # Предсказание вероятностей принадлежности к каждому классу
     predicted_probabilities = clf.predict_proba(user_command_vector)
-
     # Задание порога совпадения
     threshold = 0.09
-
     # Поиск наибольшей вероятности и выбор ответа, если он превышает порог
     max_probability = max(predicted_probabilities[0])
     print(max_probability)
@@ -84,24 +151,17 @@ def recognize(data):
         answer = clf.classes_[predicted_probabilities[0].argmax()]
     else:
         return ("Команда не распознана")
-    
-
-    #получение имени функции из ответа из data_set
+     #получение имени функции из ответа из data_set
     func_name = answer.split()[0]
-    #запуск функции из skills
+    #запуск  функции
     exec(func_name + '()')
-
-    #возврат ответа из модели data_set
+    #возврат ответа
     return(answer.replace(func_name, ''))
-
-
-    
 
 
 
 #Обучение модели на data_set 
 
-print("stage1")
 vectorizer = CountVectorizer()
 vectors = vectorizer.fit_transform(list(words.data_set.keys()))
     
@@ -114,9 +174,8 @@ alpaca_init()
 #del words.data_set
 
 # запуск бота
-bot = Bot(token=MAIN_TOKEN)
+bot = Bot(token=config.MAIN_TOKEN)
 dp = Dispatcher(bot)
-print("stage2")
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
@@ -133,10 +192,14 @@ async def send_welcome(message: types.Message):
  
 @dp.message_handler()
 async def echo(message: types.Message):
+   global comand_text
+   if len(config.TRUSTED_LIST)>0:
+	   exit
    await message.answer(recognize(message.text))
    mess = comand_text
    if len(comand_text)>0:
-      await bot.send_message(CHAT_ID, comand_text)
+      await bot.send_message(config.CHAT_ID, mess)
+   comand_text = ""
 
 
 

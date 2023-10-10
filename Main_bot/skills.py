@@ -20,7 +20,7 @@ def game():
 	try:
 		subprocess.Popen('C:/Program Files/paint.net/PaintDotNet.exe')
 	except:
-		voice.speaker('Путь к файлу не найден, проверьте, правильный ли он')
+		print('Путь к файлу не найден, проверьте, правильный ли он')
 
 
 def offpc():
@@ -34,7 +34,7 @@ def weather():
 	'''Для работы этого кода нужно зарегистрироваться на сайте
 	https://openweathermap.org или переделать на ваше усмотрение под что-то другое'''
 	try:
-		params = {'q': 'London', 'units': 'metric', 'lang': 'ru', 'appid': 'ключ к API'}
+		params = {'q': 'Tula', 'units': 'metric', 'lang': 'ru', 'appid': 'ключ к API'}
 		response = requests.get(f'https://api.openweathermap.org/data/2.5/weather', params=params)
 		if not response:
 			raise
@@ -42,7 +42,7 @@ def weather():
 		voice.speaker(f"На улице {w['weather'][0]['description']} {round(w['main']['temp'])} градусов")
 		
 	except:
-		voice.speaker('Произошла ошибка при попытке запроса к ресурсу API, проверь код')
+		print('Произошла ошибка при попытке запроса к ресурсу API, проверь код')
 
 
 def offBot():
@@ -54,3 +54,14 @@ def passive():
 	'''Функция заглушка при простом диалоге с ботом'''
 	pass
 
+def sw1on():
+	pass
+
+def sw1off():
+	pass
+
+def sw2on():
+	pass
+
+def sw2off():
+	pass

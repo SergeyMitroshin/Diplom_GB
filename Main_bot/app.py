@@ -14,7 +14,7 @@ pip install requests
 
 '''
 
-import json
+#import json
 from sklearn.feature_extraction.text import CountVectorizer     #pip install scikit-learn
 from sklearn.linear_model import LogisticRegression
 import words
@@ -41,9 +41,9 @@ def recognize(data):
     '''
     Анализ распознанной речи
     '''
-    #Пропускаем все, если длина расспознанного текста меньше 12 символов
+    #Пропускаем все, если длина расспознанного текста меньше 7 символов
     print(data)
-    if len(data) < 12:
+    if len(data) < 7:
         return result
     #если нет фразы обращения к ассистенту, то отправляем запрос альпаке
     lowdata = remove_punctuation(data.lower())
@@ -66,7 +66,7 @@ def recognize(data):
     predicted_probabilities = clf.predict_proba(user_command_vector)
 
     # Задание порога совпадения
-    threshold = 0.12
+    threshold = 0.09
 
     # Поиск наибольшей вероятности и выбор ответа, если он превышает порог
     max_probability = max(predicted_probabilities[0])

@@ -14,7 +14,7 @@ pip install requests
 
 '''
 
-#import json
+
 from sklearn.feature_extraction.text import CountVectorizer     #pip install scikit-learn
 from sklearn.linear_model import LogisticRegression
 import words

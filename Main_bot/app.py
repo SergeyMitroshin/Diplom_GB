@@ -179,11 +179,15 @@ dp = Dispatcher(bot)
 
 @dp.message_handler(commands=['start'])
 async def send_welcome(message: types.Message):
-   await message.reply("Привет!\nЯ умный бот - персональный ассистент!\nМеня зовут Кеша.\nЯ могу много чего.\nОтправь мне любое сообщение, а я тебе обязательно отвечу.")
+	if (len(config.TRUSTED_LIST)>0) and not (message.from_id  in config.TRUSTED_LIST):
+        return
+    await message.reply("Привет!\nЯ умный бот - персональный ассистент!\nМеня зовут Кеша.\nЯ могу много чего.\nОтправь мне любое сообщение, а я тебе обязательно отвечу.")
 
 @dp.message_handler(commands=['help'])
 async def send_welcome(message: types.Message):
-   await message.reply("Подсказка")
+    if (len(config.TRUSTED_LIST)>0) and not (message.from_id  in config.TRUSTED_LIST):
+        return
+	await message.reply("Подсказка")
 
 
 #@dp.message_handler(commands=['settings'])
@@ -192,16 +196,16 @@ async def send_welcome(message: types.Message):
  
 @dp.message_handler()
 async def echo(message: types.Message):
-   global comand_text
-   if len(config.TRUSTED_LIST)>0:
-	   if message.from_id not in config.TRUSTED_LIST:
-		   await message.answer ("Получите права пользования ботом и тогда пишите")
-	       return
-   await message.answer(recognize(message.text))
-   mess = comand_text
-   if len(comand_text)>0:
-      await bot.send_message(config.CHAT_ID, mess)
-   comand_text = ""
+    global comand_text
+    if (len(config.TRUSTED_LIST)>0) and not (message.from_id  in config.TRUSTED_LIST):
+        return
+    await message.answer(recognize(message.text))
+    mess = comand_text
+    comand_text = ""
+    if len(mess)>0:
+        await bot.send_message(config.CHAT_ID, mess)
+
+	
 
 
 

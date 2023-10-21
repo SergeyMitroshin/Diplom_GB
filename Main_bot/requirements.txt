@@ -1,0 +1,10 @@
+scikit-learn
+pyttsx3
+requests
+bitsandbytes
+datasets
+loralib
+sentencepiece
+aiogram==2.23.1
+transformers @ git+https://github.com/zphang/transformers@c3dc391
+huggingface @ git+https://github.com/huggingface/peft.git

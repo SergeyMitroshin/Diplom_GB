@@ -1,35 +1,23 @@
-'''
-Требуется:
-pip install scikit-learn
-
-
-pip install --force-reinstall -v "aiogram==2.23.1"
-
-pip install pyttsx3
-
-Не обязательно:
-pip install requests
-
-Для получения справки, спроси у него 'Что ты умеешь Кеша?' или 'справка Кеша'
-
-'''
-
-
-
-
+# Основной файл приложения. Запускать его!
 
 from sklearn.feature_extraction.text import CountVectorizer     #pip install scikit-learn
 from sklearn.linear_model import LogisticRegression
 import words
 import string
-#from skills import *
-from alpaca_d import alpaca_init, evaluate
 from aiogram import Bot, Dispatcher, executor, types
 import os
 import webbrowser
 import sys
 import subprocess
 import config
+# поключить нужный модуль
+
+# модуль-заглушка
+from alpaca_d import alpaca_init, evaluate
+
+# модель alpaca-lora
+#from alpaca import alpaca_init, evaluate 
+
 
 
 try:

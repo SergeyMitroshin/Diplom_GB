@@ -23,7 +23,7 @@ def generate_prompt(instruction, input=None):
 ### Response:"""
     
 
-def alpaca_init():
+def init():
     tokenizer = LLaMATokenizer.from_pretrained("decapoda-research/llama-7b-hf")
     model = LLaMAForCausalLM.from_pretrained(
       "decapoda-research/llama-7b-hf",

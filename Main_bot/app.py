@@ -18,6 +18,9 @@ from alpaca_d import alpaca_init, evaluate
 # модель alpaca-lora
 #from alpaca import alpaca_init, evaluate 
 
+# модель g4f gpt external
+# from g4f_external import init, evaluate
+
 
 
 try:
@@ -157,7 +160,7 @@ clf = LogisticRegression()
 clf.fit(vectors, list(words.data_set.values()))
 
 #инициализация большой языковой модели
-alpaca_init()
+init()
 
 #del words.data_set
 

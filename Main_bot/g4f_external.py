@@ -30,7 +30,7 @@ from g4f.Provider import (
 
 
 
-def init():
+def llminit():
     response = g4f.ChatCompletion.create(
     model="gpt-3.5-turbo",
     provider=g4f.Provider.Aichat,

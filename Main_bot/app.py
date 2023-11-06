@@ -13,7 +13,7 @@ import config
 # поключить нужный модуль
 
 # модуль-заглушка
-from alpaca_d import alpaca_init, evaluate
+from alpaca_d import llminit, evaluate
 
 # модель alpaca-lora
 #from alpaca import alpaca_init, evaluate 
@@ -134,7 +134,7 @@ def recognize(data):
     # Предсказание вероятностей принадлежности к каждому классу
     predicted_probabilities = clf.predict_proba(user_command_vector)
     # Задание порога совпадения
-    threshold = 0.09
+    threshold = 0.05
     # Поиск наибольшей вероятности и выбор ответа, если он превышает порог
     max_probability = max(predicted_probabilities[0])
     print(max_probability)
@@ -159,8 +159,10 @@ vectors = vectorizer.fit_transform(list(words.data_set.keys()))
 clf = LogisticRegression()
 clf.fit(vectors, list(words.data_set.values()))
 
+
+
 #инициализация большой языковой модели
-init()
+llminit()
 
 #del words.data_set
 
